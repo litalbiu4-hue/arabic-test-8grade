@@ -65,6 +65,7 @@ h1{font-size:28px;margin:0;font-weight:800}
 .opt.ok{border-color:var(--ok);background:var(--ok-soft)}
 .opt.bad{border-color:var(--bad);background:var(--bad-soft)}
 .opt:disabled{cursor:default}
+#toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:100;background:#fff;border:2px solid var(--brand);border-radius:16px;padding:14px 16px;max-width:520px;width:calc(100% - 24px);box-shadow:0 8px 30px rgba(0,0,0,.2);font-size:15.5px}
 .speak{border:0;background:#fff;border-radius:10px;padding:2px 10px;cursor:pointer;font-size:18px;vertical-align:middle}
 .row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
 .btn{border:0;border-radius:12px;padding:11px 20px;font:inherit;font-size:17px;font-weight:700;cursor:pointer;background:var(--brand);color:#fff}
@@ -108,7 +109,23 @@ function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor
 function sample(a,n){return shuffle(a).slice(0,n);}
 function pick(a){return a[Math.floor(Math.random()*a.length)];}
 const AR=(t,cls="")=>`<span class="ar ${cls}" lang="ar">${t}</span>`;
-function speak(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="ar-SA";u.rate=.8;speechSynthesis.speak(u);}catch(e){}}
+let AR_VOICE=null;
+function findVoice(){ try{ const v=speechSynthesis.getVoices(); AR_VOICE=v.find(x=>/^ar/i.test(x.lang))||null; return v.length; }catch(e){ return 0; } }
+if(typeof speechSynthesis!=="undefined"){ findVoice(); speechSynthesis.onvoiceschanged=findVoice; }
+function toast(html){ let t=document.getElementById("toast"); if(!t){ t=document.createElement("div"); t.id="toast"; document.body.appendChild(t); }
+  t.innerHTML=html+`<button onclick="this.parentNode.remove()" style="margin-top:8px;display:block" class="btn">הבנתי</button>`; }
+function speak(t){
+  try{
+    if(!AR_VOICE) findVoice();
+    if(!AR_VOICE){ toast(`<b>🔇 אין במכשיר הזה קול בערבית</b>, ולכן ההשמעה לא עובדת. אפשר להוסיף קול כזה:<ul style="margin:6px 0;padding-inline-start:20px">
+      <li><b>אייפון/אייפד:</b> הגדרות ← נגישות ← תוכן מדובר ← קולות ← ערבית (להוריד קול).</li>
+      <li><b>אנדרואיד:</b> הגדרות ← נגישות / שפה ← פלט טקסט לדיבור ← מנוע Google ← התקנת נתוני קול ← ערבית.</li>
+      <li><b>מחשב Windows:</b> הגדרות ← זמן ושפה ← דיבור ← הוספת קולות ← ערבית. ואז לרענן את הדף.</li>
+      <li><b>מחשב Mac:</b> הגדרות מערכת ← נגישות ← תוכן מדובר ← קול מערכת ← ניהול קולות ← ערבית.</li></ul>
+      הכי פשוט: לפתוח את האתר ב-<b>Google Chrome</b> – בדרך כלל יש בו קול ערבי מובנה.`); return; }
+    speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t); u.voice=AR_VOICE; u.lang=AR_VOICE.lang; u.rate=.8; speechSynthesis.speak(u);
+  }catch(e){}
+}
 const canSpeak=typeof window!=="undefined"&&"speechSynthesis" in window;
 const spk=t=>canSpeak?`<button class="speak" title="השמע" onclick='speak(${JSON.stringify(t)})'>🔊</button>`:"";
 const LS="arab8_progress_v1", WK="arab8_words_v1";
