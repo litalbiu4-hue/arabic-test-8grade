@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מתכוננים למבחן בערבית – כיתה ח'</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&family=Noto+Naskh+Arabic:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3f0f7; --card:#fffefc; --ink:#22202b; --muted:#66637a; --line:#e2dcea;
+  --brand:#6b3fa0; --brand-soft:#ede5f7; --ok:#1f8a4c; --ok-soft:#dff3e6;
+  --bad:#c0392b; --bad-soft:#fbe3df; --warn-soft:#fdf0d5; --mid-c:#d98a1c;
+  --easy:#2f9e6b; --mid:#d98a1c; --hard:#c4453a; --radius:16px;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:"Rubik",system-ui,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:18px;line-height:1.5}
+.wrap{max-width:880px;margin:0 auto;padding:20px 14px 60px}
+.ar{font-family:"Noto Naskh Arabic","Traditional Arabic","Arial",serif;direction:rtl;unicode-bidi:isolate;font-weight:700;line-height:1.9}
+.ar.big{font-size:44px}
+.ar.huge{font-size:84px;line-height:1.5}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+h1{font-size:28px;margin:0;font-weight:800}
+.sub{color:var(--muted);margin:4px 0 0;font-size:16px}
+.chip-date{background:var(--ink);color:#fff;border-radius:999px;padding:8px 14px;font-weight:700;font-size:15px}
+.howto{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;margin-bottom:16px;font-size:16px}
+.section-title{font-size:15px;font-weight:700;color:var(--muted);margin:22px 4px 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:14px}
+.topic{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;display:flex;flex-direction:column;gap:10px}
+.topic .t-head{display:flex;gap:10px;align-items:center}
+.topic .icon{font-size:24px;width:48px;height:48px;display:grid;place-items:center;background:var(--brand-soft);border-radius:12px;flex:none}
+.topic h3{margin:0;font-size:19px;line-height:1.25}
+.topic p{margin:0;color:var(--muted);font-size:14.5px}
+.levels{display:flex;gap:8px;margin-top:auto}
+.lvl{flex:1;border:0;border-radius:12px;padding:9px 4px 7px;font:inherit;font-size:15px;font-weight:700;color:#fff;cursor:pointer;display:flex;flex-direction:column;align-items:center}
+.lvl.l0{background:var(--easy)} .lvl.l1{background:var(--mid)} .lvl.l2{background:var(--hard)}
+.lvl .stars{font-size:12px;letter-spacing:1px;min-height:16px}
+.exbtn{border:2px solid var(--brand);background:#fff;color:var(--brand);border-radius:12px;padding:7px 10px;font:inherit;font-size:15px;font-weight:700;cursor:pointer}
+.exbtn:hover{background:var(--brand-soft)}
+.allrow{display:flex;gap:8px}
+.allbtn{flex:1;border:2px solid #2b6cb0;background:#fff;color:#2b6cb0;border-radius:12px;padding:7px 6px;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+.wstat{font-size:13px;color:var(--muted)}
+.wbar{height:7px;background:#e4dded;border-radius:999px;overflow:hidden;margin-bottom:3px}.wbar>div{height:100%;background:#2b6cb0}
+.bigbtn{display:block;width:100%;border:0;border-radius:var(--radius);padding:16px;font:inherit;font-size:20px;font-weight:800;color:#fff;background:linear-gradient(135deg,#6b3fa0,#2b6cb0);cursor:pointer}
+.resetall{margin-top:26px;text-align:center}
+.linkbtn{background:none;border:0;color:var(--muted);font:inherit;font-size:14px;text-decoration:underline;cursor:pointer}
+.qbar{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.back{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:8px 14px;font:inherit;font-size:15px;cursor:pointer;white-space:nowrap}
+.qtitle{font-weight:700;font-size:17px;flex:1}
+.badge{border-radius:999px;padding:3px 10px;color:#fff;font-size:13px;font-weight:700;margin-inline-start:6px}
+.badge.l0{background:var(--easy)} .badge.l1{background:var(--mid)} .badge.l2{background:var(--hard)} .badge.l3,.badge.l4,.badge.l5{background:#2b6cb0}
+.progress{height:10px;background:#e1d9ea;border-radius:999px;overflow:hidden;margin-bottom:16px}
+.progress>div{height:100%;background:var(--brand);transition:width .3s}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+.qnum{color:var(--muted);font-size:14px;margin-bottom:6px}
+.qtext{font-size:21px;font-weight:500;margin-bottom:16px}
+.show{text-align:center;background:var(--brand-soft);border-radius:16px;padding:6px 10px;margin:-4px 0 16px}
+.opts{display:grid;gap:10px;grid-template-columns:1fr 1fr}
+@media (max-width:520px){.opts{grid-template-columns:1fr}}
+.opt{border:2px solid var(--line);background:#fff;border-radius:14px;padding:10px 16px;font:inherit;font-size:19px;cursor:pointer;text-align:start}
+.opt.ar{font-size:30px;text-align:center;padding:4px 10px}
+.opt:hover:not(:disabled){border-color:var(--brand)}
+.opt.ok{border-color:var(--ok);background:var(--ok-soft)}
+.opt.bad{border-color:var(--bad);background:var(--bad-soft)}
+.opt:disabled{cursor:default}
+.speak{border:0;background:#fff;border-radius:10px;padding:2px 10px;cursor:pointer;font-size:18px;vertical-align:middle}
+.row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.btn{border:0;border-radius:12px;padding:11px 20px;font:inherit;font-size:17px;font-weight:700;cursor:pointer;background:var(--brand);color:#fff}
+.btn.ghost{background:transparent;border:2px solid var(--line);color:var(--ink)}
+.fb{margin-top:14px;border-radius:14px;padding:12px 16px;font-size:17px}
+.fb.ok{background:var(--ok-soft);color:#14532d}
+.fb.bad{background:var(--bad-soft);color:#7f1d1d}
+.fb .model{margin-top:6px}
+.ex-head{display:flex;align-items:center;gap:12px;margin-bottom:6px;flex-wrap:wrap}
+.ex-head h2{margin:0;font-size:24px;flex:1}
+.ex-sec{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin:12px 0}
+.ex-sec h3{margin:0 0 8px;font-size:19px;color:var(--brand)}
+.ex-sec p{margin:6px 0}
+.ex-sec ul,.ex-sec ol{margin:6px 0;padding-inline-start:22px}
+.ex-sec li{margin:4px 0}
+.key{background:var(--warn-soft);border-right:4px solid var(--mid-c);border-radius:10px;padding:10px 14px;margin:10px 0;font-weight:500}
+table.rt{width:100%;border-collapse:collapse;margin:8px 0;font-size:17px}
+table.rt th,table.rt td{border:1px solid var(--line);padding:6px 8px;text-align:start;vertical-align:middle}
+table.rt th{background:var(--brand-soft)}
+table.rt td.ar{font-size:30px;text-align:center}
+.ex-start{display:flex;gap:8px;margin:18px 0 6px;flex-wrap:wrap}
+.modal{position:fixed;inset:0;background:rgba(30,20,40,.45);display:flex;align-items:flex-start;justify-content:center;padding:20px 10px;overflow:auto;z-index:50}
+.modal .inner{background:var(--bg);border-radius:18px;max-width:860px;width:100%;padding:18px}
+.sum{text-align:center}
+.sum .score{font-size:56px;font-weight:800;margin:6px 0}
+.sum .bigstars{font-size:40px;letter-spacing:6px}
+.mist{text-align:start;margin-top:18px}
+.mist li{margin-bottom:6px}
+.wl{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:6px}
+.wl div{display:flex;justify-content:space-between;align-items:center;gap:8px;background:#f8f5fb;border-radius:10px;padding:2px 10px}
+.wl .ar{font-size:26px}
+@media (max-width:520px){ body{font-size:17px} h1{font-size:23px} .qtext{font-size:19px} .card{padding:15px} .ar.huge{font-size:70px} }
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<script>
+/* ================= עזרים ================= */
+const $=(s,el=document)=>el.querySelector(s);
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function sample(a,n){return shuffle(a).slice(0,n);}
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+const AR=(t,cls="")=>`<span class="ar ${cls}" lang="ar">${t}</span>`;
+function speak(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="ar-SA";u.rate=.8;speechSynthesis.speak(u);}catch(e){}}
+const canSpeak=typeof window!=="undefined"&&"speechSynthesis" in window;
+const spk=t=>canSpeak?`<button class="speak" title="השמע" onclick='speak(${JSON.stringify(t)})'>🔊</button>`:"";
+const LS="arab8_progress_v1", WK="arab8_words_v1";
+function loadProg(){try{return JSON.parse(localStorage.getItem(LS))||{};}catch(e){return {};}}
+function saveProg(p){try{localStorage.setItem(LS,JSON.stringify(p));}catch(e){}}
+function loadW(){try{return JSON.parse(localStorage.getItem(WK))||{};}catch(e){return {};}}
+function markWord(k,ok){const m=loadW();if(ok)m[k]=1;else delete m[k];try{localStorage.setItem(WK,JSON.stringify(m));}catch(e){}}
+
+/* ================= האותיות ================= */
+// c=אות, n=שם, h=מקבילה בעברית, lat=צליל, conn=מתחברת לאות שאחריה, dots=נקודות
+const LETTERS=[
+ {c:"ا",n:"אלף",h:"א",lat:"a",conn:false,dots:"אין נקודות – קו ישר"},
+ {c:"ر",n:"רא",h:"ר",lat:"r",conn:false,dots:"אין נקודות"},
+ {c:"ز",n:"זאי",h:"ז",lat:"z",conn:false,dots:"נקודה אחת מעל (כמו רא + נקודה)"},
+ {c:"د",n:"דאל",h:"ד",lat:"d",conn:false,dots:"אין נקודות"},
+ {c:"و",n:"וואו",h:"ו",lat:"w",conn:false,dots:"אין נקודות"},
+ {c:"ذ",n:"ד'אל",h:"ד'",lat:"dh",conn:false,dots:"נקודה אחת מעל (כמו דאל + נקודה)"},
+ {c:"ب",n:"בא",h:"ב",lat:"b",conn:true,dots:"נקודה אחת מתחת"},
+ {c:"ت",n:"תא",h:"ת",lat:"t",conn:true,dots:"שתי נקודות מעל"},
+ {c:"ي",n:"יא",h:"י",lat:"y",conn:true,dots:"שתי נקודות מתחת"},
+ {c:"ل",n:"לאם",h:"ל",lat:"l",conn:true,dots:"אין נקודות"},
+ {c:"م",n:"מים",h:"מ",lat:"m",conn:true,dots:"אין נקודות"},
+ {c:"ن",n:"נון",h:"נ",lat:"n",conn:true,dots:"נקודה אחת מעל"},
+ {c:"س",n:"סין",h:"ס",lat:"s",conn:true,dots:"אין נקודות – 3 \"שיניים\""},
+ {c:"ش",n:"שין",h:"ש",lat:"sh",conn:true,dots:"שלוש נקודות מעל"},
+ {c:"ف",n:"פא",h:"פ",lat:"f",conn:true,dots:"נקודה אחת מעל"},
+ {c:"ق",n:"קאף",h:"ק",lat:"q",conn:true,dots:"שתי נקודות מעל"},
+ {c:"ك",n:"כאף",h:"כ",lat:"k",conn:true,dots:"אין נקודות (יש \"דגל\" קטן בפנים)"},
+];
+const L=Object.fromEntries(LETTERS.map(x=>[x.c,x]));
+const T="ـ"; // tatweel
+function forms(c){ const x=L[c]; return x.conn?{iso:c,ini:c+T,med:T+c+T,fin:T+c}:{iso:c,ini:c,med:T+c,fin:T+c}; }
+const LOOKALIKE=[["ب","ت","ن","ي"],["د","ذ"],["ر","ز"],["س","ش"],["ف","ق"]];
+const twins=c=>(LOOKALIKE.find(g=>g.includes(c))||[]).filter(x=>x!==c);
+
+/* ================= אוצר מילים ================= */
+const WORDS=[
+ ["تِلْمِيذ","תלמיד"],["تِلْمِيذَة","תלמידה"],["بِنْت","בת / ילדה"],["أُمِّي","אמי"],["أَبِي","אבא שלי"],
+ ["فِي","בתוך / ב..."],["وَ","ו..."],["مِنْ","מ..."],["إِلَى","אל..."],["أَنَا","אני"],["أَنْتِ","את"],
+ ["وِدَاد","ודאד (שם של בת)"],["مَرْيَم","מרים (שם של בת)"],["يُوسُف","יוסף (שם של בן)"],["شَرِيف","שריף (שם של בן)"],
+ ["مَدْرَسَة","בית ספר"],["أَيْنَ","היכן / איפה"],["أَدِيب","מנומס"],["مَدِينَة","עיר"],["مُقَدَّسَة","מקודשת"],
+ ["دُرْزِيّ","דרוזי"],["يَا","מילת פנייה"],["أَيّ","איזה"],["الْقُدْس","ירושלים"],["كَبِير","גדול"],["كَبِيرَة","גדולה"],
+ ["أَوْلَاد","ילדים"],["يَوْم","יום"],["الْيَوْم","היום"],["يُسَافِرُ","נוסע"],["سَيَّارَة","מכונית"],["بِسَيَّارَة","במכונית"],
+ ["فُورْد","פורד"],["لِمَاذَا","מדוע / למה"],["تَدْرُسُ","אתה לומד"],["فِي الْبُسْتَان","בגינה"],["فِي أَيّ","באיזה / באיזו"],
+ ["سَنَة","שנה"],["سَافَرْتِ","את נסעת"],["أَمْرِيكَا","אמריקה"]
+];
+const SENTS=[
+ ["أَيْنَ الْمَدْرَسَة؟","היכן בית הספר?",["איזה בית ספר?","בית הספר גדול.","מדוע בית הספר?"]],
+ ["أَنَا تِلْمِيذ.","אני תלמיד.",["אני תלמידה.","את תלמידה.","הוא תלמיד."]],
+ ["أَنَا تِلْمِيذَة.","אני תלמידה.",["אני תלמיד.","את תלמיד.","אמי תלמידה."]],
+ ["الْقُدْس مَدِينَة كَبِيرَة.","ירושלים עיר גדולה.",["ירושלים עיר מקודשת.","העיר גדולה היום.","איפה העיר הגדולה?"]],
+ ["الْقُدْس مَدِينَة مُقَدَّسَة.","ירושלים עיר מקודשת.",["ירושלים עיר גדולה.","בית הספר בירושלים.","באיזו עיר?"]],
+ ["يُوسُف تِلْمِيذ أَدِيب.","יוסף תלמיד מנומס.",["יוסף תלמיד גדול.","מרים תלמידה מנומסת.","יוסף בבית הספר."]],
+ ["أَبِي فِي الْبُسْتَان.","אבא שלי בגינה.",["אמי בגינה.","אבא שלי בבית הספר.","אני בגינה."]],
+ ["يَا وِدَاد، أَيْنَ أَنْتِ؟","ודאד, איפה את?",["ודאד, מדוע את?","ודאד, את בגינה.","איפה ודאד?"]],
+ ["لِمَاذَا يُسَافِرُ شَرِيف إِلَى أَمْرِيكَا؟","מדוע שריף נוסע לאמריקה?",["באיזו שנה שריף נסע לאמריקה?","היכן שריף?","שריף נוסע במכונית."]],
+ ["فِي أَيّ سَنَة سَافَرْتِ إِلَى أَمْرِيكَا؟","באיזו שנה נסעת לאמריקה?",["מדוע נסעת לאמריקה?","היכן אמריקה?","באיזו מכונית נסעת?"]],
+ ["يُسَافِرُ بِسَيَّارَة فُورْد.","נוסע במכונית פורד.",["נוסע לאמריקה.","המכונית גדולה.","את נסעת במכונית."]],
+ ["أَيْنَ تَدْرُسُ؟","היכן אתה לומד?",["מדוע אתה לומד?","אתה לומד בבית הספר.","היכן בית הספר?"]],
+ ["الْأَوْلَاد فِي الْمَدْرَسَة الْيَوْم.","הילדים בבית הספר היום.",["הילדים בגינה היום.","הילד בבית הספר.","היום יום גדול."]],
+ ["مَرْيَم بِنْت أَدِيبَة.","מרים ילדה מנומסת.",["מרים ילדה גדולה.","מרים תלמידה.","מרים, איפה את?"]],
+ ["أُمِّي فِي الْمَدِينَة.","אמי בעיר.",["אבא שלי בעיר.","אמי בגינה.","אני בעיר."]],
+];
+
+/* ================= שאלות ================= */
+const mc=(q,o,ex,extra={})=>Object.assign({t:"mc",q,o,ex},extra);
+const show=(html)=>`<div class="show">${html}</div>`;
+
+// --- אותיות
+function letterName(x){x=x||pick(LETTERS); return mc("מה שם האות?",[x.n,...sample(LETTERS.filter(y=>y.c!==x.c).map(y=>y.n),3)],`${x.c} = ${x.n} – כמו ${x.h} בעברית. ${x.dots}.`,{show:AR(x.c,"huge")});}
+function letterHeb(x){x=x||pick(LETTERS); return mc("לאיזו אות בעברית היא מקבילה?",[x.h,...sample([...new Set(LETTERS.filter(y=>y.c!==x.c).map(y=>y.h))],3)],null,{show:AR(x.c,"huge")});}
+function nameToLetter(x){x=x||pick(LETTERS); const tw=twins(x.c); const others=[...tw,...shuffle(LETTERS.map(y=>y.c).filter(c=>c!==x.c&&!tw.includes(c)))].slice(0,3);
+  return mc(`איזו מהאותיות היא <b>${x.n}</b>?`,[x.c,...others],`${x.n}: ${x.dots}.`,{arOpts:true});}
+function dotsQ(x){ x=x||pick(LETTERS.filter(y=>!/^אין/.test(y.dots))); const all=[...new Set(LETTERS.map(y=>y.dots.split(" (")[0].split(" –")[0]))];
+  const right=x.dots.split(" (")[0].split(" –")[0]; return mc(`כמה נקודות יש לאות <b>${x.n}</b> ואיפה?`,[right,...sample(all.filter(d=>d!==right),3)],null,{show:AR(x.c,"huge")});}
+function formQ(){ const x=pick(LETTERS); const f=forms(x.c); const kind=pick(["ini","med","fin"]); const nm={ini:"בתחילת מילה",med:"באמצע מילה",fin:"בסוף מילה"}[kind];
+  return mc(`איזו אות כתובה כאן (${nm})?`,[x.n,...sample(LETTERS.filter(y=>y.c!==x.c).map(y=>y.n),3)],`האות ${x.n} ${nm} נכתבת ${f[kind]}.`,{show:AR(f[kind],"huge")});}
+const FIRST_OK=WORDS.filter(([w])=>{const c=w.replace(/^ال/,"")[0].replace(/[أإ]/,"ا");return L[c];});
+function firstLetter(){ const [w,h]=pick(FIRST_OK.filter(([w])=>!w.startsWith("ال")&&!w.includes(" "))); const c=w[0].replace(/[أإ]/,"ا"); const x=L[c];
+  return mc(`מה האות הראשונה במילה? (${h})`,[x.n,...sample([...twins(c).map(t=>L[t].n),...LETTERS.filter(y=>y.c!==c).map(y=>y.n)].filter((v,i,a)=>a.indexOf(v)===i),3)],null,{show:AR(w,"big")});}
+const SWAP={"ب":["ت","ن"],"ت":["ب","ن"],"ن":["ت","ب"],"ي":["ب","ت"],"د":["ذ"],"ذ":["د"],"ر":["ز"],"ز":["ر"],"س":["ش"],"ش":["س"],"ف":["ق"],"ق":["ف"]};
+function spellQ(){ const cand=WORDS.filter(([w])=>!w.includes(" ")&&[...w].some(c=>SWAP[c])); const [w,h]=pick(cand);
+  const idx=[...w].map((c,i)=>SWAP[c]?i:-1).filter(i=>i>=0); const wrong=new Set();
+  for(let k=0;k<20&&wrong.size<3;k++){ const i=pick(idx); const arr=[...w]; arr[i]=pick(SWAP[arr[i]]); const v=arr.join(""); if(v!==w) wrong.add(v); }
+  return mc(`איזו מילה כתובה נכון? <b>${h}</b>`,[w,...wrong],"שים לב לנקודות – הן ההבדל בין אותיות דומות!",{arOpts:true});}
+
+// --- אותיות מתחברות
+const NONCONN=["ا","ر","ز","د","و","ذ"], CONN=LETTERS.filter(x=>x.conn).map(x=>x.c);
+const PIECES=[["تِلْمِيذ",1],["بِنْت",1],["أَنَا",2],["يَوْم",2],["مَرْيَم",2],["أَبِي",2],["كَبِيرَة",2],["مَدْرَسَة",3],["سَيَّارَة",3],["وِدَاد",4],["أَوْلَاد",4],["دُرْزِيّ",4],["مَدِينَة",2],["سَنَة",1],["أَمْرِيكَا",3]];
+const CONN_FACTS=[
+ mc("מה עוזר לזכור את האותיות שלא מתחברות לאות שאחריהן?",["ארז דוד'","בית ספר","אבג\"ד","שמש ירח"],"א-ר-ז-ד-ו-ד' = ا ر ز د و ذ"),
+ mc("כמה אותיות (מאלה שלמדנו) לא מתחברות לאות שאחריהן?",["6","4","17","11"]),
+ mc("אות \"ארז דוד'\" מתחברת...",["רק לאות שלפניה (מימין), לא לאות שאחריה","לשני הצדדים","לא מתחברת בכלל לשום אות","רק לאות שאחריה"]),
+ mc("מה קורה אחרי אות שלא מתחברת?",["האות הבאה נכתבת בצורת \"תחילת מילה\"","המילה נגמרת","שמים נקודה","האות הבאה נמחקת"]),
+ mc("באיזה כיוון כותבים בערבית?",["מימין לשמאל, כמו בעברית","משמאל לימין","מלמעלה למטה","בשני הכיוונים"]),
+ mc("כמה צורות יכולות להיות לאות מתחברת?",["4 – בודדת, תחילית, אמצעית, סופית","1","2","10"]),
+];
+function nonConnQ(){ const nc=pick(NONCONN); return mc("איזו אות <b>לא</b> מתחברת לאות שאחריה?",[nc,...sample(CONN,3)],`${L[nc].n} היא אחת מאותיות \"ארז דוד'\".`,{arOpts:true}); }
+function connQ(){ const c=pick(CONN); return mc("איזו אות <b>כן</b> מתחברת לאות שאחריה?",[c,...sample(NONCONN,3)],"כל האותיות מתחברות – חוץ מ\"ארז דוד'\": ا ر ز د و ذ.",{arOpts:true}); }
+function yesNoConn(){ const x=pick(LETTERS); return mc(`האם האות ${x.n} מתחברת לאות שאחריה?`,[x.conn?"כן":"לא",x.conn?"לא":"כן"],x.conn?"כן – היא לא מ\"ארז דוד'\".":"לא – היא מ\"ארז דוד'\".",{show:AR(x.c,"huge"),keep:true}); }
+function piecesQ(){ const [w,n]=pick(PIECES); return mc("לכמה חלקים (קבוצות מחוברות) מתחלקת המילה?",[String(n),...sample(["1","2","3","4","5"].filter(x=>x!==String(n)),3)],"סופרים: אחרי כל אות מ\"ארז דוד'\" מתחיל חלק חדש.",{show:AR(w,"big")}); }
+
+// --- תנועות
+const VOW=[{s:"َ",n:"פתחה",h:"ַ",lat:"a",pos:"קו קטן מעל האות"},{s:"ِ",n:"כסרה",h:"ִ",lat:"i",pos:"קו קטן מתחת לאות"},{s:"ُ",n:"דמה",h:"ֻ",lat:"u",pos:"וו קטנה מעל האות"},{s:"ْ",n:"סוכון",h:"ְ",lat:"",pos:"עיגול קטן מעל האות"}];
+const VL=LETTERS.filter(x=>x.c!=="ا"&&x.c!=="ذ");
+const readOf=(x,v)=>`${x.h}${v.h} (${x.lat}${v.lat})`;
+function vowName(){ const v=pick(VOW), x=pick(VL); return mc("מה שם התנועה?",[v.n,...VOW.filter(y=>y!==v).map(y=>y.n)],`${v.n} = ${v.pos}${v.lat?` – נשמעת ${v.lat}`:" – בלי תנועה"}.`,{show:AR(x.c+v.s,"huge")}); }
+function vowRead(){ const v=pick(VOW), x=pick(VL); return mc("איך קוראים?",[readOf(x,v),...VOW.filter(y=>y!==v).map(y=>readOf(x,y))],`${v.n}${v.lat?` = ${v.lat}`:" = בלי תנועה"}.`,{show:AR(x.c+v.s,"huge")}); }
+function vowWrite(){ const v=pick(VOW), x=pick(VL); return mc(`איך כותבים <b>${readOf(x,v)}</b>?`,VOW.map(y=>x.c+y.s).sort((a,b)=>a===x.c+v.s?-1:b===x.c+v.s?1:0),null,{arOpts:true}); }
+const VOW_FACTS=[
+ mc("איזו תנועה נכתבת <b>מתחת</b> לאות?",["כסרה","פתחה","דמה","סוכון"]),
+ mc("איזו תנועה נשמעת a (כמו פתח בעברית)?",["פתחה","כסרה","דמה","סוכון"]),
+ mc("איזו תנועה נשמעת i (כמו חיריק)?",["כסרה","פתחה","דמה","סוכון"]),
+ mc("איזו תנועה נשמעת u (כמו קובוץ)?",["דמה","פתחה","כסרה","סוכון"]),
+ mc("מה מסמן הסוכון?",["שאין תנועה – האות נקראת בלי תנועה (כמו שווא נח)","שהאות כפולה","שהמילה בנקבה","שזו שאלה"]),
+ mc("איך נראית הדמה?",["כמו וו קטנה מעל האות","כמו קו מתחת לאות","כמו עיגול","כמו שלוש נקודות"]),
+ mc("איך נראה הסוכון?",["עיגול קטן מעל האות","קו מתחת לאות","וו קטנה","שתי נקודות"]),
+ mc("כמה תנועות קצרות + סוכון למדנו?",["3 תנועות + סוכון","2 תנועות","5 תנועות","אין תנועות בערבית"]),
+];
+
+// --- סימני ניקוד
+const SIGN_FACTS=[
+ mc("מה שם הסימן?",["המזה","שדה","סוכון","פתחה"],"המזה = עצירה קצרה בגרון, כמו א' עם הפסק.",{show:AR("ء","huge")}),
+ mc("מה שם הסימן מעל האות?",["שדה","המזה","דמה","סוכון"],"שדה = האות מוכפלת, כמו דגש חזק בעברית.",{show:AR("بّ","huge")}),
+ mc("מה מסמנת השדה (ّ)?",["שהאות נאמרת פעמיים – מוכפלת (כמו דגש חזק)","שאין תנועה","סימן נקבה","ה' הידיעה"]),
+ mc("באיזו מילה יש שדה?",["سَيَّارَة","مَدْرَسَة","تِلْمِيذ","بِنْت"],"سَيَّارَة – על ה-يّ יש שדה.",{arOpts:true}),
+ mc("באיזו מילה יש שדה?",["أُمِّي","أَبِي","أَنَا","سَنَة"],"أُمِّي – על ה-مّ יש שדה.",{arOpts:true}),
+ mc("באיזו מילה יש שדה?",["مُقَدَّسَة","مَدِينَة","كَبِير","يَوْم"],"مُقَدَّسَة – על ה-دّ יש שדה.",{arOpts:true}),
+ mc("מה זה أَلْ בתחילת מילה?",["ה' הידיעה – כמו \"ה\" בעברית","סימן נקבה","מילת שאלה","מילת פנייה"],"أَلْبَيْت = הבית."),
+ mc("איך אומרים \"היום\" (עם ה' הידיעה)?",["الْيَوْم","يَوْم","يَوْمَة","يَا يَوْم"],"يَوْم = יום. الْيَوْم = היום.",{arOpts:true}),
+ mc("מה הפירוש של الْمَدْرَسَة?",["בית הספר","בית ספר","בתי ספר","בבית ספר"],"ال = ה' הידיעה."),
+ mc("באיזו מילה יש ה' הידיעה (ال)?",["الْبُسْتَان","بُسْتَان","بِنْت","أَنَا"],null,{arOpts:true}),
+ mc("מה שם הסימן בסוף המילה?",["תא מרבוטה – סימן הנקבה","המזה","שדה","אל הידיעה"],"ة = תא מרבוטה. הוא הופך מילה לנקבה.",{show:AR("ة","huge")}),
+ mc("מה מסמנת התא מרבוטה (ة)?",["נקבה","רבים","שאלה","ה' הידיעה"]),
+ mc("מה זה ئـ?",["המזה על כסא של האות יא (בלי הנקודות)","יא רגילה","תא מרבוטה","שדה"],"ה\"כסא\" נראה כמו יא בלי נקודות, וההמזה יושבת עליו."),
+ mc("איפה נכתבת התא מרבוטה?",["רק בסוף מילה","רק בתחילת מילה","באמצע מילה","מתחת לאות"]),
+ mc("מה יש בתחילת המילה أَنَا מעל האלף?",["המזה","שדה","תא מרבוטה","סוכון"],"أ = אלף עם המזה מעליה.",{show:AR("أَنَا","big")}),
+];
+
+// --- זכר ונקבה
+const FEM=[["تِلْمِيذ","تِلْمِيذَة","תלמיד","תלמידה"],["كَبِير","كَبِيرَة","גדול","גדולה"],["أَدِيب","أَدِيبَة","מנומס","מנומסת"],["دُرْزِيّ","دُرْزِيَّة","דרוזי","דרוזית"],["شَرِيف","شَرِيفَة","שריף (אציל)","שריפה (אצילה)"]];
+function femQ(){ const [m,f,hm,hf]=pick(FEM.slice(0,4)); const base=m.replace(/ّ$/,"");
+  return mc(`מה צורת הנקבה של ${AR(m)} (${hm})?`,[f,base+"ت",m+"ا",m+"ي"].filter((v,i,a)=>a.indexOf(v)===i).slice(0,4),`מוסיפים תא מרבוטה (ة) בסוף: ${m} ← ${f}`,{arOpts:true}); }
+function mascQ(){ const [m,f,hm,hf]=pick(FEM.slice(0,4)); return mc(`מה צורת הזכר של ${AR(f)} (${hf})?`,[m,f+"ا",m+"ة",m.replace(/^/,"ال")],`מורידים את ה-ة מהסוף: ${f} ← ${m}`,{arOpts:true}); }
+const GENDER=[["مَدْرَسَة","נקבה"],["مَدِينَة","נקבה"],["سَيَّارَة","נקבה"],["سَنَة","נקבה"],["كَبِيرَة","נקבה"],["تِلْمِيذَة","נקבה"],["مُقَدَّسَة","נקבה"],["تِلْمِيذ","זכר"],["كَبِير","זכר"],["أَدِيب","זכר"],["يَوْم","זכר"],["بُسْتَان","זכר"],["دُرْزِيّ","זכר"]];
+function genderQ(){ const [w,g]=pick(GENDER); return mc("המילה בזכר או בנקבה?",[g,g==="זכר"?"נקבה":"זכר"],g==="נקבה"?"יש בסוף ة (תא מרבוטה) – סימן הנקבה.":"אין בסוף ة – לכן זכר.",{show:AR(w,"big"),keep:true}); }
+const AGREE=[
+ mc("השלם: الْقُدْس مَدِينَة ___",["كَبِيرَة","كَبِير"],"مَدِينَة (עיר) היא נקבה – לכן גם התואר בנקבה: كَبِيرَة.",{arOpts:true,keep:true}),
+ mc("השלם: يُوسُف تِلْمِيذ ___",["أَدِيب","أَدِيبَة"],"יוסף ותלמיד – זכר, לכן أَدِيب.",{arOpts:true,keep:true}),
+ mc("השלם: مَرْيَم تِلْمِيذَة ___",["أَدِيبَة","أَدِيب"],"מרים – נקבה, לכן أَدِيبَة.",{arOpts:true,keep:true}),
+ mc("השלם: وِدَاد ___",["تِلْمِيذَة","تِلْمِيذ"],"ודאד היא בת – תלמידה.",{arOpts:true,keep:true}),
+ mc("השלם: الْمَدْرَسَة ___",["كَبِيرَة","كَبِير"],"مَدْرَسَة – נקבה (יש ة).",{arOpts:true,keep:true}),
+ mc("השלם: الْيَوْم يَوْم ___",["كَبِير","كَبِيرَة"],"يَوْم – זכר.",{arOpts:true,keep:true}),
+ mc("השלם: أَنَا ___ (בן מדבר)",["تِلْمِيذ","تِلْمِيذَة"],null,{arOpts:true,keep:true}),
+ mc("השלם: أَنْتِ ___ (את...)",["تِلْمِيذَة","تِلْمِيذ"],"أَنْتِ = את (נקבה) – תלמידה.",{arOpts:true,keep:true}),
+];
+const FEM_FACTS=[
+ mc("איך הופכים מילה מזכר לנקבה בערבית?",["מוסיפים ة (תא מרבוטה) בסוף","מוסיפים ال בהתחלה","מוסיפים שדה","מורידים את האות הראשונה"]),
+ mc("מה התרגום של تِلْمِيذَة?",["תלמידה","תלמיד","תלמידים","התלמיד"],null,{show:AR("تِلْمِيذَة","big")}),
+ mc("מה התרגום של كَبِيرَة?",["גדולה","גדול","הגדול","גדולים"],null,{show:AR("كَبِيرَة","big")}),
+ mc("לפני התא מרבוטה (ة) האות מקבלת תנועה...",["פתחה (َ)","כסרה (ِ)","דמה (ُ)","סוכון (ْ)"],"תִלְמִיד ← תִלְמִידַה: לפני ה-ة יש פתחה: ـذَة"),
+];
+
+/* ================= נושאים ================= */
+function genArHe(list,n,dir){ // dir: "ah" ערבית→עברית, "ha"
+  const m=loadW(); const un=shuffle(list.filter(w=>!m[dir+":"+w[0]])), dn=shuffle(list.filter(w=>m[dir+":"+w[0]]));
+  return [...un,...dn].slice(0,n).map(([a,h])=>{ const wrongPool=list.filter(x=>x[0]!==a&&x[1]!==h);
+    if(dir==="ah") return mc("מה הפירוש?",[h,...sample(wrongPool,3).map(x=>x[1])],null,{show:AR(a,"big")+spk(a),mkey:"ah:"+a,ans:`${a} = ${h}`});
+    return mc(`איך אומרים בערבית: <b>${h}</b>?`,[a,...sample(wrongPool,3).map(x=>x[0])],null,{arOpts:true,mkey:"ha:"+a,ans:`${h} = ${a}`}); });
+}
+function sentQ(){ const [a,h,w]=pick(SENTS); return mc("מה הפירוש של המשפט?",[h,...w],null,{show:AR(a,"big")+spk(a),ans:`${a} = ${h}`}); }
+const TOPICS=[
+ {id:"letters",group:"אותיות וכתיבה",icon:"ب",title:"זיהוי האותיות",desc:"17 האותיות שנלמדו – שם, צורה ונקודות",
+  levels:[()=>shuffle([...sample(LETTERS,6).map(letterName),...sample(LETTERS,4).map(letterHeb)]),()=>shuffle([...sample(LETTERS,6).map(nameToLetter),dotsQ(),dotsQ(),formQ(),formQ()]),()=>shuffle([formQ(),formQ(),formQ(),firstLetter(),firstLetter(),spellQ(),spellQ(),spellQ(),...sample(LETTERS,2).map(nameToLetter)])]},
+ {id:"conn",group:"אותיות וכתיבה",icon:"ـبـ",title:"ארז דוד' – אותיות שלא מתחברות",desc:"ا ر ز د و ذ מול האותיות המתחברות",
+  levels:[()=>shuffle([...sample(CONN_FACTS,4),nonConnQ(),nonConnQ(),connQ(),yesNoConn(),yesNoConn(),yesNoConn()]),()=>shuffle([nonConnQ(),connQ(),yesNoConn(),yesNoConn(),formQ(),formQ(),piecesQ(),piecesQ(),...sample(CONN_FACTS,2)]),()=>shuffle([piecesQ(),piecesQ(),piecesQ(),piecesQ(),formQ(),formQ(),formQ(),nonConnQ(),connQ(),yesNoConn()])]},
+ {id:"vow",group:"אותיות וכתיבה",icon:"بَ",title:"התנועות",desc:"פתחה, כסרה, דמה וסוכון",
+  levels:[()=>shuffle([...sample(VOW_FACTS,5),vowName(),vowName(),vowName(),vowName(),vowName()]),()=>shuffle([vowRead(),vowRead(),vowRead(),vowRead(),vowRead(),vowName(),vowName(),...sample(VOW_FACTS,3)]),()=>shuffle([vowWrite(),vowWrite(),vowWrite(),vowWrite(),vowRead(),vowRead(),vowRead(),vowRead(),...sample(VOW_FACTS,2)])]},
+ {id:"signs",group:"אותיות וכתיבה",icon:"ّ",title:"סימני הניקוד",desc:"המזה, שדה, ئـ, אל הידיעה, תא מרבוטה",
+  levels:[()=>sample(SIGN_FACTS.slice(0,3).concat(SIGN_FACTS.slice(6,7),SIGN_FACTS.slice(10,15)),9),()=>sample(SIGN_FACTS,10),()=>shuffle([...sample(SIGN_FACTS.filter(q=>q.arOpts||q.show),7),...sample(SIGN_FACTS,3)])]},
+ {id:"fem",group:"דקדוק",icon:"ة",title:"מזכר לנקבה",desc:"מוסיפים ة – تِلْمِيذ ← تِلْمِيذَة",
+  levels:[()=>shuffle([...sample(FEM_FACTS,3),genderQ(),genderQ(),genderQ(),genderQ(),femQ(),femQ(),femQ()]),()=>shuffle([femQ(),femQ(),femQ(),mascQ(),mascQ(),genderQ(),genderQ(),...sample(AGREE,3)]),()=>shuffle([...sample(AGREE,6),femQ(),mascQ(),genderQ(),...sample(FEM_FACTS,1)])]},
+ {id:"vocab",group:"אוצר מילים",icon:"📚",title:"אוצר המילים למבחן",desc:`${WORDS.length} מילים + משפטים קצרים`,words:WORDS,
+  levels:[()=>genArHe(WORDS,10,"ah"),()=>genArHe(WORDS,10,"ha"),()=>shuffle([...sample(SENTS,0).concat([sentQ(),sentQ(),sentQ(),sentQ(),sentQ(),sentQ()]),...genArHe(WORDS,4,"ah")])]},
+];
+TOPICS.forEach(t=>{ if(t.words){ t.levels[3]=()=>genArHe(t.words,999,"ah"); t.levels[4]=()=>genArHe(t.words,999,"ha"); } });
+const FINAL={id:"final",title:"מבחן מסכם",icon:"🎯",levels:[]};
+FINAL.levels[5]=()=>shuffle([letterName(),nameToLetter(),formQ(),spellQ(),nonConnQ(),piecesQ(),vowName(),vowRead(),vowWrite(),...sample(SIGN_FACTS,3),femQ(),genderQ(),...sample(AGREE,2),...genArHe(WORDS,4,"ah"),sentQ(),sentQ()]);
+const LVL=["קל","בינוני","קשה","כל המילים: ערבית ← עברית","כל המילים: עברית ← ערבית","מבחן"];
+
+/* ================= הסברים ================= */
+const SEC=(t,b)=>`<div class="ex-sec"><h3>${t}</h3>${b}</div>`;
+const KEY=h=>`<div class="key">⭐ ${h}</div>`;
+const EXPLAIN={
+ letters:()=>SEC("17 האותיות שלמדנו",`<table class="rt"><tr><th>אות</th><th>שם</th><th>כמו בעברית</th><th>נקודות</th></tr>
+   ${LETTERS.map(x=>`<tr><td class="ar" lang="ar">${x.c}</td><td><b>${x.n}</b></td><td>${x.h}</td><td>${x.dots}</td></tr>`).join("")}</table>`)+
+  SEC("משפחות של אותיות דומות – ההבדל הוא בנקודות!",`<table class="rt"><tr><th>צורה</th><th>האותיות</th><th>איך מבדילים</th></tr>
+   <tr><td class="ar" lang="ar">ب ت ن ي</td><td>בא, תא, נון, יא</td><td>בא – נקודה <b>אחת למטה</b> · תא – <b>שתיים למעלה</b> · נון – <b>אחת למעלה</b> · יא – <b>שתיים למטה</b></td></tr>
+   <tr><td class="ar" lang="ar">د ذ</td><td>דאל, ד'אל</td><td>ד'אל = דאל + נקודה למעלה</td></tr>
+   <tr><td class="ar" lang="ar">ر ز</td><td>רא, זאי</td><td>זאי = רא + נקודה למעלה</td></tr>
+   <tr><td class="ar" lang="ar">س ش</td><td>סין, שין</td><td>שין = סין + 3 נקודות (כמו 3 הנקודות של ש בעברית!)</td></tr>
+   <tr><td class="ar" lang="ar">ف ق</td><td>פא, קאף</td><td>פא – נקודה <b>אחת</b> · קאף – <b>שתיים</b>, והזנב שלה עגול ויורד למטה</td></tr></table>
+   ${KEY("טריק ל<b>בא</b> ו<b>יא</b>: הנקודות שלהן <b>למטה</b>. \"<b>ב</b>ור\" – נקודה אחת נפלה לבור; \"<b>י</b>ש לי שתי רגליים\" – שתי נקודות למטה.")}
+   ${KEY("<b>ת</b>א ו<b>ק</b>אף – שתי נקודות <b>למעלה</b>. <b>נ</b>ון ו<b>פ</b>א – נקודה אחת <b>למעלה</b>.")}`)+
+  SEC("4 הצורות של אות",`<p>רוב האותיות משנות צורה לפי המקום שלהן במילה:</p>
+   <table class="rt"><tr><th>אות</th><th>בודדת</th><th>בתחילת מילה</th><th>באמצע</th><th>בסוף</th></tr>
+   ${["ب","ي","ن","س","ف","ق","ك","ل","م","ا","د","ر","و"].map(c=>{const f=forms(c);return `<tr><td>${L[c].n}</td><td class="ar" lang="ar">${f.iso}</td><td class="ar" lang="ar">${f.ini}</td><td class="ar" lang="ar">${f.med}</td><td class="ar" lang="ar">${f.fin}</td></tr>`;}).join("")}</table>
+   ${KEY("בצורת התחלה/אמצע האות מאבדת את ה\"זנב\" שלה ונראית קטנה – מזהים אותה לפי <b>הנקודות</b>.")}`),
+ conn:()=>SEC("ארז דוד' – האותיות שלא מתחברות",`<p>בערבית כותבים <b>מימין לשמאל</b>, והאותיות במילה <b>מתחברות</b> זו לזו. אבל 6 אותיות לא מתחברות לאות שאחריהן (משמאלן):</p>
+   <div class="show">${AR("ا ر ز د و ذ","big")}<div>א · ר · ז · ד · ו · ד'</div></div>
+   ${KEY("זוכרים בעזרת <b>ארז דוד'</b>: <b>א</b>לף, <b>ר</b>א, <b>ז</b>אי, <b>ד</b>אל, <b>ו</b>ואו, <b>ד'</b>אל.")}
+   <ul><li>האותיות האלה כן מתחברות לאות <b>שלפניהן</b> (מימין).</li><li>אחרי אות מ\"ארז דוד'\" – האות הבאה מתחילה מחדש, בצורת \"תחילת מילה\".</li><li>לכן לאותיות האלה יש רק 2 צורות: בודדת וסופית.</li></ul>`)+
+  SEC("דוגמאות – לכמה חלקים מתחלקת המילה?",`<table class="rt"><tr><th>מילה</th><th>חלקים</th><th>למה</th></tr>
+   <tr><td class="ar" lang="ar">تِلْمِيذ</td><td>1</td><td>אין \"ארז דוד'\" באמצע – הכול מחובר (ה-ذ בסוף)</td></tr>
+   <tr><td class="ar" lang="ar">مَدْرَسَة</td><td>3</td><td>مد | ر | سة – אחרי د ואחרי ر מתחילים מחדש</td></tr>
+   <tr><td class="ar" lang="ar">وِدَاد</td><td>4</td><td>و | د | ا | د – כולן מ\"ארז דוד'\"!</td></tr>
+   <tr><td class="ar" lang="ar">أَنَا</td><td>2</td><td>أ | نا</td></tr></table>`),
+ vow:()=>SEC("התנועות",`<table class="rt"><tr><th>סימן</th><th>שם</th><th>איפה</th><th>נשמע</th><th>כמו בעברית</th></tr>
+   <tr><td class="ar" lang="ar">بَ</td><td><b>פתחה</b></td><td>קו קטן <b>מעל</b></td><td>a – בַּ</td><td>פתח / קמץ</td></tr>
+   <tr><td class="ar" lang="ar">بِ</td><td><b>כסרה</b></td><td>קו קטן <b>מתחת</b></td><td>i – בִּ</td><td>חיריק</td></tr>
+   <tr><td class="ar" lang="ar">بُ</td><td><b>דמה</b></td><td>וו קטנה <b>מעל</b></td><td>u – בֻּ</td><td>קובוץ / שורוק</td></tr>
+   <tr><td class="ar" lang="ar">بْ</td><td><b>סוכון</b></td><td>עיגול קטן <b>מעל</b></td><td>בלי תנועה – בְּ</td><td>שווא נח</td></tr></table>
+   ${KEY("<b>פתחה</b> – \"פותחים\" את הפה: <b>a</b>. <b>כסרה</b> – יושבת <b>למטה</b>, כמו החיריק שלנו: <b>i</b>. <b>דמה</b> – נראית כמו <b>ו</b> קטנה ← <b>u</b>. <b>סוכון</b> – עיגול = <b>אפס</b> תנועה.")}`)+
+  SEC("דוגמאות",`<table class="rt"><tr><th>כתוב</th><th>קוראים</th></tr>
+   ${[["مَ","מַ (ma)"],["مِ","מִ (mi)"],["مُ","מֻ (mu)"],["مْ","מְ (m)"],["كَ","כַ (ka)"],["سِ","סִ (si)"],["نُ","נֻ (nu)"],["مَدْرَسَة","מַדְרַסַה – בית ספר"]].map(([a,b])=>`<tr><td class="ar" lang="ar">${a}</td><td>${b}</td></tr>`).join("")}</table>`),
+ signs:()=>SEC("סימני הניקוד",`<table class="rt"><tr><th>סימן</th><th>שם</th><th>מה הוא עושה</th><th>דוגמה</th></tr>
+   <tr><td class="ar" lang="ar">ء</td><td><b>המזה</b></td><td>עצירה קצרה בגרון (כמו א' שנקראת עם הפסק). יכולה לשבת על אלף: أ</td><td class="ar" lang="ar">أَنَا</td></tr>
+   <tr><td class="ar" lang="ar">بّ</td><td><b>שדה</b></td><td><b>מכפילה</b> את האות – אומרים אותה פעמיים. כמו דגש חזק</td><td class="ar" lang="ar">سَيَّارَة</td></tr>
+   <tr><td class="ar" lang="ar">ئـ</td><td><b>המזה על כסא של יא</b></td><td>ה\"כסא\" = צורת יא <b>בלי נקודות</b>, וההמזה יושבת עליו</td><td class="ar" lang="ar">ـئـ</td></tr>
+   <tr><td class="ar" lang="ar">أَلْ</td><td><b>אל הידיעה</b></td><td>= <b>ה</b> הידיעה בעברית. מתחברת למילה</td><td class="ar" lang="ar">أَلْبَيْت</td></tr>
+   <tr><td class="ar" lang="ar">ة</td><td><b>תא מרבוטה</b></td><td><b>סימן הנקבה</b> – רק בסוף מילה. נראית כמו ه עם שתי נקודות</td><td class="ar" lang="ar">كَبِيرَة</td></tr></table>
+   ${KEY("<b>שדה</b> נראית כמו <b>w</b> קטנה (שׁ) – \"<b>ש</b>דה = <b>ש</b>תי פעמים\".")}
+   ${KEY("<b>אל</b> = <b>ה</b>: يَوْم = יום ← الْيَوْم = <b>ה</b>יום · مَدْرَسَة = בית ספר ← الْمَدْرَسَة = <b>ה</b>בית ספר.")}
+   ${KEY("<b>ת</b>א <b>מ</b>רבוטה = סימן <b>נ</b>קבה – כמו <b>ה/ת</b> בסוף מילה בעברית: תלמיד<b>ה</b>, גדול<b>ה</b>.")}`),
+ fem:()=>SEC("מזכר לנקבה – מוסיפים ة",`<p>כדי להפוך מילה מזכר לנקבה, מוסיפים בסוף <b>תא מרבוטה – ة</b>, והאות שלפניה מקבלת <b>פתחה</b>:</p>
+   <table class="rt"><tr><th>זכר</th><th></th><th>נקבה</th><th></th></tr>
+   ${FEM.slice(0,4).map(([m,f,hm,hf])=>`<tr><td class="ar" lang="ar">${m}</td><td>${hm}</td><td class="ar" lang="ar">${f}</td><td>${hf}</td></tr>`).join("")}</table>
+   ${KEY("בדיוק כמו בעברית: תלמיד ← תלמיד<b>ה</b>, גדול ← גדול<b>ה</b>. בערבית ה\"ה\" הזאת היא <b>ة</b>.")}`)+
+  SEC("התאמה – זכר עם זכר, נקבה עם נקבה",`<p>שם התואר מתאים לשם העצם:</p>
+   <div class="show">${AR("الْقُدْس مَدِينَة كَبِيرَة","big")}<div>ירושלים עיר גדול<b>ה</b> – כי مَدِينَة (עיר) בנקבה</div></div>
+   <div class="show">${AR("يُوسُف تِلْمِيذ أَدِيب","big")}<div>יוסף תלמיד מנומס – הכול בזכר</div></div>
+   <p>מילים בנקבה מהחומר: <span class="ar">مَدْرَسَة · مَدِينَة · سَيَّارَة · سَنَة · مُقَدَّسَة</span></p>
+   <p style="font-size:15px;color:var(--muted)">יש גם מילים בנקבה בלי ة – למשל שמות של בנות (مَرْيَم, وِدَاد) ו-بِنْت.</p>`),
+ vocab:()=>SEC("כל המילים (לחץ 🔊 לשמיעה)",`<div class="wl">${WORDS.map(([a,h])=>`<div><span class="ar" lang="ar">${a}</span><span>${h}</span>${spk(a)}</div>`).join("")}</div>`)+
+  SEC("טיפים לזכירה",`<ul><li><span class="ar">أَيْنَ</span> (איפה) – נשמע כמו \"<b>אַיֵּה</b>\" בעברית.</li>
+   <li><span class="ar">لِمَاذَا</span> (מדוע) – מתחיל ב<b>לְ</b>, כמו \"<b>ל</b>מה\".</li>
+   <li><span class="ar">كَبِير</span> (גדול) – כמו \"<b>כביר</b>\" בעברית (\"עשה כביר\").</li>
+   <li><span class="ar">مَدِينَة</span> (עיר) – כמו \"<b>מדינה</b>\" בעברית.</li>
+   <li><span class="ar">مُقَدَّسَة</span> (מקודשת) – כמו \"<b>מקודשת</b>\": ק-ד-ש ← ق-د-س.</li>
+   <li><span class="ar">سَنَة</span> (שנה) – כמעט כמו \"<b>שנה</b>\".</li><li><span class="ar">يَوْم</span> (יום) – כמו \"<b>יום</b>\".</li>
+   <li><span class="ar">أَنَا</span> (אני) · <span class="ar">أَنْتِ</span> (את) – כמו \"<b>אנ</b>י\", \"<b>את</b>\".</li>
+   <li><span class="ar">بِنْت</span> (בת) – כמו \"<b>בת</b>\" עם נ באמצע.</li>
+   <li><span class="ar">تِلْمِيذ</span> (תלמיד) – כמעט זהה לעברית!</li><li><span class="ar">مَدْرَسَة</span> – כמו \"<b>מדרשה</b>\": מקום שלומדים בו.</li>
+   <li><span class="ar">يُسَافِرُ</span> (נוסע) – מזכיר \"<b>ספארי</b>\" – מסע!</li></ul>`),
+};
+
+/* ================= מסכים ================= */
+let S=null; const app=$("#app");
+function stars(p){return p>=90?3:p>=70?2:p>=50?1:0;}
+function home(){
+  S=null; const prog=loadProg();
+  let h=`<header class="top"><div><h1>מתכוננים למבחן בערבית 🌙</h1><p class="sub">כיתה ח' · ספר עמ' 6–10 + המחברת</p></div></header>
+  <div class="howto">בכל נושא: קודם <b>📘 הסבר</b> עם טבלאות וטריקים לזכירה, ואז תרגול ב-3 שלבים: <b style="color:var(--easy)">קל</b> ← <b style="color:var(--mid)">בינוני</b> ← <b style="color:var(--hard)">קשה</b>. בכל תשובה מופיע הסבר קצר.</div>`;
+  let g="";
+  TOPICS.forEach((t,ti)=>{
+    if(t.group!==g){ if(g) h+=`</div>`; g=t.group; h+=`<div class="section-title">${g}</div><div class="grid">`; }
+    h+=`<div class="topic"><div class="t-head"><div class="icon"><span class="ar" lang="ar" style="font-size:26px;line-height:1">${t.icon}</span></div><div><h3>${t.title}</h3><p>${t.desc}</p></div></div>
+     <button class="exbtn" onclick="explain(${ti})">📘 הסבר ודרכים לזכור</button><div class="levels">`;
+    [0,1,2].forEach(l=>{const b=prog[t.id+"_"+l];const st=b==null?"":"★".repeat(stars(b))+"☆".repeat(3-stars(b));
+      h+=`<button class="lvl l${l}" onclick="start(${ti},${l})">${LVL[l]}<span class="stars">${st}</span></button>`;});
+    h+=`</div>`;
+    if(t.words){ const m=loadW(); const ah=t.words.filter(w=>m["ah:"+w[0]]).length, ha=t.words.filter(w=>m["ha:"+w[0]]).length;
+      h+=`<div class="wstat"><div class="wbar"><div style="width:${Math.round(ah/t.words.length*100)}%"></div></div>✅ יודע: ${ah}/${t.words.length} (ערבית ← עברית) · ${ha}/${t.words.length} (עברית ← ערבית)</div>
+      <div class="allrow"><button class="allbtn" onclick="start(${ti},3)">כל המילים: ערבית ← עברית</button><button class="allbtn" onclick="start(${ti},4)">עברית ← ערבית</button></div>`; }
+    h+=`</div>`;
+  });
+  const fb=prog["final_5"];
+  h+=`</div><div class="section-title">🎯 לסיום</div><button class="bigbtn" onclick="start(-1,5)">🎯 מבחן מסכם – 25 שאלות מכל החומר${fb!=null?`<br><span style="font-size:15px">שיא: ${fb}%</span>`:""}</button>
+  <div class="resetall"><button class="linkbtn" onclick="if(confirm('לאפס את כל ההתקדמות?')){saveProg({});try{localStorage.removeItem(WK)}catch(e){};home();}">איפוס התקדמות</button></div>`;
+  app.innerHTML=h; scrollTo(0,0);
+}
+function explain(ti){
+  const t=TOPICS[ti]; S=null;
+  app.innerHTML=`<div class="qbar"><button class="back" onclick="home()">→ חזרה</button><div class="qtitle">📘 הסבר</div></div>
+  <div class="ex-head"><h2>${t.title}</h2></div>${EXPLAIN[t.id]()}
+  <div class="ex-start">${[0,1,2].map(l=>`<button class="lvl l${l}" onclick="start(${ti},${l})">לתרגול – ${LVL[l]}</button>`).join("")}</div>`;
+  scrollTo(0,0);
+}
+function explainModal(){
+  if(!S||S.ti<0) return; const t=S.topic; const m=document.createElement("div"); m.className="modal";
+  m.innerHTML=`<div class="inner"><div class="ex-head"><h2>📘 ${t.title}</h2><button class="btn" id="mclose">חזרה לתרגול ✕</button></div>${EXPLAIN[t.id]()}</div>`;
+  m.onclick=e=>{if(e.target===m)m.remove();}; document.body.appendChild(m); $("#mclose",m).onclick=()=>m.remove();
+}
+function start(ti,l){ const t=ti<0?FINAL:TOPICS[ti]; S={ti,l,topic:t,qs:t.levels[l](),i:0,score:0,mistakes:[]}; S.max=S.qs.length; showQ(); }
+function head(){
+  const t=S.topic,pct=Math.round(S.i/S.qs.length*100);
+  return `<div class="qbar"><button class="back" onclick="home()">→ חזרה</button><div class="qtitle">${t.title}<span class="badge l${S.l}">${LVL[S.l]}</span></div>${S.ti>=0?`<button class="back" onclick="explainModal()">📘 הסבר</button>`:""}</div>
+  <div class="progress"><div style="width:${pct}%"></div></div>`;
+}
+function showQ(){
+  const q=S.qs[S.i]; const o=q.keep?q.o.slice():shuffle(q.o);
+  app.innerHTML=head()+`<div class="card"><div class="qnum">שאלה ${S.i+1} מתוך ${S.qs.length}</div><div class="qtext">${q.q}</div>${q.show?show(q.show):""}
+   <div class="opts">${o.map(x=>`<button class="opt ${q.arOpts?"ar":""}" ${q.arOpts?'lang="ar"':""} data-v="${x.replace(/"/g,"&quot;")}">${x}</button>`).join("")}</div><div id="fb"></div></div>`;
+  scrollTo(0,0);
+  document.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+    const ok=b.dataset.v===q.o[0]; if(q.mkey) markWord(q.mkey,ok);
+    document.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(x.dataset.v===q.o[0])x.classList.add("ok");});
+    if(!ok) b.classList.add("bad");
+    finish(ok?1:0,ok?"נכון! ✔️":"לא נכון. התשובה הנכונה מסומנת בירוק.",q.ex,q.ans||(strip(q.q)+(q.show?" "+strip(q.show):"")+" ← "+q.o[0]));
+  });
+}
+function strip(s){return String(s).replace(/<button[\s\S]*?<\/button>/g,"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();}
+function finish(pts,msg,ex,review){
+  S.score+=pts; if(pts<1&&review) S.mistakes.push(review);
+  const last=S.i===S.qs.length-1;
+  $("#fb").innerHTML=`<div class="fb ${pts>=1?"ok":"bad"}"><b>${msg}</b>${ex?`<div class="model">💡 ${ex}</div>`:""}</div>
+  <div class="row"><button class="btn" id="next">${last?"לסיכום 🏁":"הבא ←"}</button></div>`;
+  const nx=$("#next"); nx.onclick=next; setTimeout(()=>nx.focus({preventScroll:true}),50);
+  $("#fb").scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+function next(){S.i++; if(S.i<S.qs.length) showQ(); else summary();}
+function summary(){
+  const pct=Math.round(S.score/S.max*100),st=stars(pct); const prog=loadProg(),key=S.topic.id+"_"+S.l;
+  if(prog[key]==null||pct>prog[key]){prog[key]=pct;saveProg(prog);}
+  const msg=pct>=90?"מעולה! אתה מוכן! 🏆":pct>=70?"יפה מאוד! עוד קצת תרגול ⭐":pct>=50?"התחלה טובה – נסה שוב 💪":"כדאי לחזור על ההסבר ולנסות שוב 📘";
+  const nextL=S.ti>=0&&S.l<2&&pct>=70?`<button class="btn" onclick="start(${S.ti},${S.l+1})">לשלב ה${LVL[S.l+1]} ←</button>`:"";
+  app.innerHTML=`<div class="qbar"><button class="back" onclick="home()">→ חזרה</button><div class="qtitle">${S.topic.title}<span class="badge l${S.l}">${LVL[S.l]}</span></div></div>
+  <div class="card sum"><div class="bigstars">${"★".repeat(st)}${"☆".repeat(3-st)}</div><div class="score">${pct}%</div><div style="font-size:20px;font-weight:700">${msg}</div>
+  <div class="row" style="justify-content:center;margin-top:18px">${nextL}<button class="btn ghost" onclick="start(${S.ti},${S.l})">שוב 🔁</button><button class="btn ghost" onclick="home()">לכל הנושאים</button></div>
+  ${S.mistakes.length?`<div class="mist"><h4>כדאי לחזור על:</h4><ul>${S.mistakes.map(m=>`<li>${m}</li>`).join("")}</ul></div>`:""}</div>`;
+  scrollTo(0,0);
+}
+home();
+</script>
+</body>
+</html>
